@@ -22,17 +22,17 @@ typedef struct{  //顺序表（顺序结构）的定义
 }SqList;
 /*-----page 19 on textbook ---------*/
 status InitList(SqList *L);
-status DestroyList(SqList L);
-status ClearList(SqList L);
+status DestroyList(SqList *L);
+status ClearList(SqList *L);
 status ListEmpty(SqList L);
 int ListLength(SqList L);
 status GetElem(SqList L,int i,ElemType *e);
-status LocateElem(SqList L,ElemType e); //简化过
+int LocateElem(SqList L,ElemType e); //简化过
 status PriorElem(SqList L, ElemType cur, ElemType *pre_e);
 status NextElem(SqList L, ElemType cur, ElemType *next_e);
-status ListInsert(SqList L,int i,ElemType e);
-status ListDelete(SqList L,int i,ElemType *e);
-status ListTrabverse(SqList L);  //简化过
+status ListInsert(SqList *L,int i,ElemType e);
+status ListDelete(SqList *L,int i,ElemType *e);
+status ListTraverse(SqList L);  //简化过
 /*--------------------------------------------*/
 
 #endif
