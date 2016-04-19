@@ -5,208 +5,296 @@
 void menu(void);
 
 int main(int argc, char const *argv[]) {
-    SqList L;
-    L.elem = NULL;
+
     ElemType p,q;
-    int op=0;
+    int op = 0,op2 = 1;
+    int num,k = 0;
     int flag = 0;
     int loc;
     char *DataFileName = "SequenceStructure.ini";
 
-    /*L.elem=(ElemType *) malloc(sizeof(ElemType)*10);           //测试用线性表
-    L.length=6;
-    L.elem[0]=1;
-    L.elem[1]=2;
-    L.elem[2]=3;
-    L.elem[3]=520;
-    L.elem[4]=9;
-    L.elem[5]=8;
-    */
+    printf("\n\n    ----  Input the number of the Linear Table you want to build: ");
+    scanf("%d",&num);
+    SqList L[num];
+    do{
+        L[k].elem = NULL;
+        k++;
+    }while(k<num);
     menu();
     do {
-        //clrscr();
-        printf("\n\n    ----  Please input your option[0-13]: ");
+        printf("\n\n    ----  Please input your option[0-15]: ");
         scanf("%d",&op);
         switch(op){
             case 0: break;
             case 1: {
                 //printf("\n     Here is IntiaList(),which  being realized\n");
-                if(InitList(&L) == 1)
-                    printf("\n          The L is created successfully.");
-                else if(InitList(&L) == -2)
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(InitList(&(L[op2-1])) == 1)
+                    printf("\n          The L%d is created successfully.",op2);
+                else if(InitList(&(L[op2-1])) == -2)
                     printf("\n          Overflow,failed to create!");
-                else if(InitList(&L) == -1)
-                    printf("\n          The L has already been created.");
-                else
-                    printf("\n          ERROR!");
+                else if(InitList(&(L[op2-1])) == -1)
+                    printf("\n          The L%d has already been created.",op2);
                 getchar();
                 break;
             }
-            case 2: {
+           case 2: {
                 //printf("\n     Here is DestroyList(),which  being realized\n");
-                if(DestroyList(&L) == 1){
-                    printf("\n          The L has been destroyed successfully.");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
                 }
-                else if(DestroyList(&L) == -1)
-                    printf("\n          The L is not exist!");
-                else
-                    printf("\n          ERROR!");
+                if(DestroyList(&L[op2-1]) == 1){
+                    printf("\n          The L%d has been destroyed successfully.",op2);
+                }
+                else if(DestroyList(&L[op2-1]) == -1)
+                    printf("\n          The L%d is not exist!",op2);
                 getchar();
                 break;
             }
             case 3: {
                 //printf("\n     Here is ClearList(),which  being realized\n");
-                if(ClearList(&L) == 1){
-                    printf("\n          The L has been cleared successfully.");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
                 }
-                else if(ClearList(&L) == -1)
-                    printf("\n          The L is not exist!");
-                else
-                    printf("\n          ERROR!");
+                if(ClearList(&L[op2-1]) == 1){
+                    printf("\n          The L%d has been cleared successfully.",op2);
+                }
+                else if(ClearList(&L[op2-1]) == -1)
+                    printf("\n          The L%d is not exist!",op2);
                 getchar();
                 break;
             }
             case 4: {
                 //printf("\n     Here is ListEmpty(),which  being realized\n");
-                if (ListEmpty(L) == -1)
-                     printf("\n          The L is not exist!");
-                else if (ListEmpty(L) == 0)
-                    printf("\n          The List is not Empty.");
-                else if(ListEmpty(L) == 1)
-                    printf("\n          The List is Empty.");
-                else
-                    printf("\n          ERROR!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if (ListEmpty(L[op2-1]) == -1)
+                     printf("\n          The L%d is not exist!",op2);
+                else if (ListEmpty(L[op2-1]) == 0)
+                    printf("\n          The List%d is not Empty.",op2);
+                else if(ListEmpty(L[op2-1]) == 1)
+                    printf("\n          The List%d is Empty.",op2);
                 getchar();
                 break;
             }
             case 5: {
                 //printf("\n     Here is ListLength() ,which  being realized\n");
-                if(ListLength(L) == -1){
-                    printf("\n          The L is not exist!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
                 }
-                else if(ListLength(L) >= 0)
-                    printf("\n          The List L has %d elem.",ListLength(L));
-                else
-                    printf("\n          ERROR!");
+                if(ListLength(L[op2-1]) == -1){
+                    printf("\n          The L%d is not exist!",op2);
+                }
+                else if(ListLength(L[op2-1]) >= 0)
+                    printf("\n          The L%d has %d elem.",op2,ListLength(L[op2-1]));
                 getchar();
                 break;
             }
             case 6: {
                 //printf("\n     Here is GetElem(),which  being realized\n");
-                if(!L.elem){
-                    printf("\n          The L is not exist!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem){
+                    printf("\n          The L%d is not exist!",op2);
                     break;
                 }
                 printf("\n          Please input the element's location for searching: ");
                 scanf("%d",&flag);
-                if(GetElem(L,flag,&p) == 0)
+                if(GetElem(L[op2-1],flag,&p) == 0)
                     printf("\n          WRONG INPUT!");
-                else if(GetElem(L,flag,&p) == 1)
-                    printf("\n          The NO.%d element is %d.",flag,p);
-                else
-                    printf("\n          ERROR!");
+                else if(GetElem(L[op2-1],flag,&p) == 1)
+                    printf("\n          The NO.%d element is %d in L%d.",flag,p,op2);
                 getchar();
                 break;
             }
             case 7: {
                 //printf("\n     Here is LocateElem(),which  being realized\n");
-                if(!L.elem){
-                    printf("\n          The L is not exist!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem){
+                    printf("\n          The L%d is not exist!",op2);
                     break;
                 }
                 printf("\n          Please input a integer for searching elem: ");
-                scanf("%d",&flag);
-                if(LocateElem(L, flag) == 0)
-                    printf("\n          The element %d is not exist in the list L!",flag);
+                scanf("%d",&p);
+                if(LocateElem(L[op2-1], p) == 0)
+                    printf("\n          The element %d is not exist in the list L%d!",p,op2);
                 else
-                    printf("\n          The element %d is No.%d in the list L.",flag,LocateElem(L, flag));
+                    printf("\n          The element %d is No.%d in the list L%d.",p,LocateElem(L[op2-1], p),op2);
                 getchar();
                 break;
             }
             case 8: {
                 //printf("\n     Here is PriorElem(),which  being realized\n");
-                if(!L.elem){
-                    printf("\n          The L is not exist!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem){
+                    printf("\n          The L%d is not exist!",op2);
                     break;
                 }
                 printf("\n          Please input the current element: ");
-                scanf("%d",&flag);
-                if(PriorElem(L, flag, &q) == 0)
+                scanf("%d",&p);
+                if(PriorElem(L[op2-1], p, &q) == 0)
                     printf("\n          This is the first element!");
-                else if(PriorElem(L, flag, &q) == 1)
+                else if(PriorElem(L[op2-1], p, &q) == 1)
                     printf("\n          The element's PriorElem is %d",q);
-                else if(PriorElem(L, flag, &q) == -2)
-                    printf("\n          The element is not in the list L.");
-                else
-                    printf("\n          ERROR!");
+                else if(PriorElem(L[op2-1], p, &q) == -2)
+                    printf("\n          The element is not in the list L%d.",op2);
                 getchar();
                 break;
             }
             case 9: {
                 //printf("\n     Here is NextElem(),which  being realized\n");
-                if(!L.elem){
-                    printf("\n          The L is not exist!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem){
+                    printf("\n          The L%d is not exist!",op2);
                     break;
                 }
                 printf("\n          Please input the current element: ");
-                scanf("%d",&flag);
-                if(NextElem(L, flag, &q) == 0)
+                scanf("%d",&p);
+                if(NextElem(L[op2-1], p, &q) == 0)
                     printf("\n          This is the last element!");
-                else if(NextElem(L, flag, &q) == 1)
+                else if(NextElem(L[op2-1], p, &q) == 1)
                     printf("\n          The element's NextElem is %d",q);
-                else if(NextElem(L, flag, &q) == -2)
-                    printf("\n          The element is not in the list L.");
-                else
-                    printf("\n          ERROR!");
+                else if(NextElem(L[op2-1], p, &q) == -2)
+                    printf("\n          The element is not in the list L%d.",op2);
+
                 getchar();
                 break;
             }
             case 10: {
                 //printf("\n     Here is ListInsert(),which  being realized\n");
-                if(!L.elem){
-                    printf("\n          The L is not exist!");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem){
+                    printf("\n          The L%d is not exist!",op2);
                     break;
                 }
                 printf("\n          Please input elem which need Insert: ");
                 scanf("%d",&p);
                 printf("\n          Please input the Location: ");
                 scanf("%d",&loc);
-                if(ListInsert(&L, loc, p) == 1)
+                if(ListInsert(&L[op2-1], loc, p) == 1)
                     printf("\n          The element:%d is inserted successfully.",p);
-                else if(ListInsert(&L, loc, p) == 0)
+                else if(ListInsert(&L[op2-1], loc, p) == 0)
                     printf("\n          WRONG INPUT!");
-                else
-                    printf("\n          ERROR!");
                 getchar();
                 break;
             }
             case 11: {
                 //printf("\n     Here is ListDelete(),which  being realized\n");
-               if(!L.elem){
-                    printf("\n          The L is not exist!");
+               printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+               if(!L[op2-1].elem){
+                    printf("\n          The L%d is not exist!",op2);
                     break;
                 }
                 printf("\n          Please input the element's location which need to be deleted: ");
                 scanf("%d",&loc);
-                if(ListDelete(&L, loc, &p) == 1)
+                if(ListDelete(&L[op2-1], loc, &p) == 1)
                     printf("\n          The element:%d is deleted successfully.",p);
-                else if(ListDelete(&L, loc, &p) == 0)
+                else if(ListDelete(&L[op2-1], loc, &p) == 0)
                     printf("\n          WRONG INPUT!");
-                else
-                    printf("\n          ERROR!");
                 getchar();
                 break;
             }
             case 12: {
                 // printf("\n     Here is ListTrabverse(),which  being realized\n");
-                if(!L.elem) printf("\n          The L is not exist!");
-                else if(!L.length) printf("\n          The L is empty!");
-                else ListTraverse(L);
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem) printf("\n          The L%d is not exist!",op2);
+                else if(!L[op2-1].length) printf("\n          The L%d is empty!",op2);
+                else ListTraverse(L[op2-1]);
                 getchar();
                 break;
             }
             case 13: {
                 menu();
+                break;
+            }
+            case 14: {
+                //printf("\n     here is SaveList(),which  being realized\n");
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+                if(!L[op2-1].elem) printf("\n          The L%d is not exist!",op2);
+                else{
+                    flag = SaveList(L[op2-1],DataFileName);
+                    if(flag) printf("\n          SaveList successfully.");
+                    else
+                        printf("\n          SaveList error.");
+
+                }
+                getchar();
+                break;
+            }
+            case 15: {
+                //printf("\n     here is LoadList(),which  being realized\n");
+
+                printf("\n    ----  Input the number of the Linear Table: ");
+                scanf("%d",&op2);
+                if(op2 > num || op2 <= 0){
+                    printf("\n          Wrong list's name!");
+                    break;
+                }
+
+                flag = LoadList(&L[op2-1],DataFileName);
+                if(flag == 1) printf("\n          LoadList successfully.");
+                else if(flag == -2)
+                    printf("\n          Overflow!");
+                else
+                    printf("\n          LoadList error!");
+                getchar();
                 break;
             }
             default: {
@@ -216,6 +304,8 @@ int main(int argc, char const *argv[]) {
     }while(op);
     printf("\n-----------------------------Welcome again!-----------------------------\n");
     getchar();
+
+    return 0;
 }
 /*------------------------------------------------------*/
 void menu(void){
@@ -226,10 +316,11 @@ void menu(void){
     printf("          2. DestroyList      6. GetElem          10.ListInsert    \n");
     printf("          3. ClearList        7. LocateElem       11.ListDelete    \n");
     printf("          4. ListEmpty        8. PriorElem        12.ListTraverse  \n");
-    printf("          13.Menu             0. Exit\n");
+    printf("          13.Menu             14.SaveList         15.LoadList      \n");
+    printf("          0. Exit\n");
     printf("------------------------------------------------------------------------");
 }
-/*------------------------------------------------------*/
+
 status InitList(SqList *L){
     if(L->elem) return INFEASTABLE;
     L->elem = (ElemType *)malloc(LIST_INIT_SIZE*sizeof(ElemType));
@@ -345,5 +436,41 @@ status ListTraverse(SqList L){
     for(i=0;i<L.length;i++) {
         printf("%d ", L.elem[i]);
     }
+    return OK;
+}
+/*------------------------------------------------------*/
+status SaveList(SqList L,char *pFile){
+    FILE *fin;
+    int i;
+    fin = fopen(pFile, "wb");
+    for (i = 0; i < L.length; i++)
+        fprintf(fin,"%d\n",*(L.elem + i));
+    fclose(fin);
+    return OK;
+}
+status LoadList(SqList *L,char *pFile){
+    FILE *fout;
+    ElemType *newbase;
+    int i=0;
+    if (!L->elem)
+        InitList(L);
+
+    if ((fout = fopen(pFile, "rb")) == NULL){
+        printf("\n          The File is not exited!");
+        return ERROR;
+    }
+    L->length = 0;
+    while ((fscanf(fout, "%d\n",(L->elem + i)) != EOF)){
+        if (L->length >= L->listsize){
+            newbase = (ElemType *)realloc(L->elem, (L->listsize + LISTINCREMENT) * sizeof(ElemType));
+            if (!newbase)
+                exit(OVERFLOW) ;
+            L->elem = newbase;
+            L->listsize += LISTINCREMENT;
+        }
+        i++;
+        L->length++;
+    }
+    fclose(fout);
     return OK;
 }
